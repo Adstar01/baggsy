@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
+const config = require("config");
+const dbgr = require("debug")("development:mongoose");
 
 mongoose
-.connect("mongodb+srv://aditya1101das:DdAoo3fr76qOeBsZ@cluster0.y6digiz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+.connect('${config.get("MONGODB_URI")}')
 .then(function(){
-    console.log("connected");
+    dbgr("connected");
 })
 .catch(function(err) {
-    console.log(err);
+    dbgr(err);
 })
 
 module.exports = mongoose.connection;
